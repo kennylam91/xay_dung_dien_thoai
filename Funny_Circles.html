@@ -5,7 +5,10 @@
     <title>Funny Circles</title>
 </head>
 <body>
-<canvas id="myCanvas" width="1250" height="630" style="border:solid 1px black"></canvas>
+<button type="button" id="startgame" onclick="startGame()">Start Game</button>
+<button type="button" id="stopgame" onclick="stopGame()">Stop Game</button>
+
+<canvas id="myCanvas" width="1250" height="600" style="border:solid 1px black"></canvas>
 <script>
     function Circle(x,y,radius){
         this.x=x;
@@ -19,7 +22,6 @@
         let red= getRandomHex();
         let green=getRandomHex();
         let blue=getRandomHex();
-        console.log(red,green,blue);
         return "rgb("+red+","+blue+","+green+")";
 
     }
@@ -30,17 +32,24 @@
         let radius=Math.random()*50+10;
         let circle1=new Circle(x,y,radius);
         let ctx=c.getContext("2d");
-        let color=getRandomColor();
         ctx.beginPath();
         ctx.arc(circle1.x,circle1.y,circle1.radius,0,2*Math.PI);
         ctx.fillStyle=color;
         ctx.fill();
         console.log(color);
     }
-    for(i=0;i<=20;i++){
-        drawCirle();
+    let myGame;
+    let color=getRandomColor();
+
+    function startGame(){
+        myGame=setInterval(drawCirle,1000);
 
     }
+    function stopGame(){
+        clearInterval(myGame);
+    }
+
+
 
 
 </script>
