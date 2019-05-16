@@ -42,7 +42,7 @@
             right:10px;
         }
         .textarea{
-            border:solid 1px black;
+
             width:85%;
             height: 50%;
             margin-top:50px;
@@ -50,17 +50,19 @@
             padding:0px;
         }
         .textarea>textarea{
+            vertical-align: top;
             width:100%;
-            height: 50%;
+            height: 60%;
             margin:0;
             padding:0;
             border:solid 1px black;
         }
         .textarea>input{
+            display:flex;
+            align-self: flex-start;
             border:solid 1px black;
-
             width:100%;
-            height: 45%;
+            height: 75%;
             margin:0;
             padding:0;
         }
@@ -75,11 +77,12 @@
         </div>
         <div class="textarea" id="inputmes1" >
             <textarea name="" id="textmsgscreen1" cols="30" rows="10"></textarea>
-            <input type="text"disabled id="outputmsg1">
+            <textarea disabled id="outputmsg1"></textarea>
         </div>
     </div>
     <div>
-        <button type="button" class="sourcebtn" id="sourcebtn1">Turn ON/OFF</button>
+        <button type="button" class="sourcebtn" id="turnonbtn1">Turn ON</button>
+        <button type="button" class="sourcebtn" id="turnoffbtn1">Turn OFF</button>
         <button type="button"  class="sourcebtn" id="chargebtn1">Charge ON/OFF</button>
         <button type="button"  class="sourcebtn" id="createmsgbtn1">Create MSG</button>
         <button type="button"  class="sourcebtn" id="sendmsgbtn1">Send MSG</button>
@@ -96,11 +99,12 @@
         </div>
         <div class="textarea" id="inputmes2" >
             <textarea name="" id="textmsgscreen2" cols="30" rows="10"></textarea>
-            <input type="text"disabled id="outputmsg2">
+            <textarea disabled id="outputmsg2"></textarea>
         </div>
     </div>
     <div>
-        <button type="button" class="sourcebtn" id="sourcebtn2">Turn ON/OFF</button>
+        <button type="button" class="sourcebtn" id="turnonbtn2">Turn ON</button>
+        <button type="button" class="sourcebtn" id="turnoffbtn2">Turn OFF</button>
         <button type="button"  class="sourcebtn" id="chargebtn2">Charge ON/OFF</button>
         <button type="button"  class="sourcebtn" id="createmsgbtn2">Create MSG</button>
         <button type="button"  class="sourcebtn" id="sendmsgbtn2">Send MSG</button>
@@ -122,7 +126,8 @@
         self.outbox = [];
         self.message = "";
         self.screen="";
-        this.sourceBtn = {};
+        this.turnOnBtn = {};
+        this.turnOffBtn={};
         this.chargeBtn={};
         self.chargescreen={};
         this.createMsgBtn={};
@@ -137,13 +142,14 @@
         };
         this.turnOn = function () {
             self.status = true;
-            self.screen.classList.toggle("On")
+            self.screen.classList.add("On");
             self.chargescreen.value=self.battery;
 
         };
-        this.turnOff = function () {
-            this.status = false;
-        };
+        this.turnOff=function(){
+            self.status=false;
+            self.screen.classList.remove("On");
+        }
         this.showBattery=function(){
             console.log(self.battery);
             if (self.battery < 100) self.battery += 1;
@@ -193,8 +199,12 @@
 
     let nokia = new Mobile("nokia", 50);
     nokia.screen = document.getElementById("screen1");
-    nokia.sourceBtn = document.getElementById("sourcebtn1");
-    nokia.sourceBtn.addEventListener("click",nokia.turnOn);
+    nokia.turnOnBtn = document.getElementById("turnonbtn1");
+    nokia.turnOnBtn.addEventListener("click",nokia.turnOn);
+    nokia.turnOffBtn=document.getElementById("turnoffbtn1");
+    nokia.turnOffBtn.onclick=function(){
+        nokia.turnOff();
+    }
     nokia.chargescreen=document.getElementById("battery1");
     nokia.chargeBtn=document.getElementById("chargebtn1");
     nokia.chargeBtn.addEventListener("click",nokia.showBattery);
@@ -215,8 +225,12 @@
 
     let iphone = new Mobile("iphone", 70);
     iphone.screen = document.getElementById("screen2");
-    iphone.sourceBtn = document.getElementById("sourcebtn2");
-    iphone.sourceBtn.addEventListener("click",iphone.turnOn);
+    iphone.turnOnBtn = document.getElementById("turnonbtn2");
+    iphone.turnOnBtn.addEventListener("click",iphone.turnOn);
+    iphone.turnOffBtn=document.getElementById("turnoffbtn2");
+    iphone.turnOffBtn.onclick=function(){
+        iphone.turnOff();
+    }
     iphone.chargescreen=document.getElementById("battery2");
     iphone.chargeBtn=document.getElementById("chargebtn2");
     iphone.chargeBtn.addEventListener("click",iphone.showBattery);
