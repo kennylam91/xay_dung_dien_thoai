@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lop_mo_ta_dien_thoai</title>
+</head>
+<body>
+<div class="phone" id="nokia">
+    <div class="screen">
+
+    </div>
+    <div>
+        <button class="sourcebtn" id="sourcebtn1">Button</button>
+    </div>
+</div>
+<div class="phone" id="iphone">
+    <div class="screen">
+
+    </div>
+    <div>
+        <button class="sourcebtn" id="sourcebtn2">Button</button>
+    </div>
+
+</div>
+<script>
+    function Mobile(name, battery) {
+        this.status = true;
+        this.name = name;
+        this.battery = battery;
+        this.draft = [];
+        this.inbox = [];
+        this.outbox = [];
+        this.message = "";
+        this.checkStatus = function () {
+            if (this.status) return true;
+            else return false;
+        };
+        this.turnOn = function () {
+            this.status = true;
+        }
+        this.turnOff = function () {
+            this.status = false;
+        }
+        this.chargeBattery = function () {
+            if (this.battery < 100) this.battery += 1;
+            else this.battery = 100;
+        };
+        this.createMsg = function (msg) {
+            if (!this.status) alert("Phone Off");
+            else this.message = msg;
+
+        };
+        this.getMsg = function (msg) {
+            if (!this.status) alert("Phone Off");
+            else this.inbox.push(msg);
+        };
+        this.sendMsg = function (phone) {
+            if (!this.status) alert("Phone Off");
+            else phone.inbox.push(this.message);
+            this.outbox.push(this.message);
+        }
+        this.showInbox = function () {
+            if (!this.status) alert("Phone Off");
+            else return this.inbox;
+        }
+        this.showOutbox = function () {
+            if (!this.status) alert("Phone Off");
+            else return this.outbox;
+        }
+        this.battertyUsed = function () {
+            if (!this.status) alert("Phone Off");
+            else this.battery -= 1;
+        }
+    }
+
+    // let nokia = new Mobile("nokia", 50);
+    // let iphone = new Mobile("iphone", 70);
+    // nokia.turnOff();
+    // nokia.turnOn();
+    // nokia.createMsg("hello");
+    // nokia.sendMsg(iphone);
+    // nokia.createMsg("xin chao");
+    // nokia.sendMsg(iphone);
+    // alert(iphone.showInbox());
+
+</script>
+
+</body>
+<style>
+    .phone {
+        display: inline-block;
+        border: solid 1px black;
+        width: 400px;
+        height: 600px;
+        margin: 20px;
+
+    }
+
+    .screen {
+        border: solid 1px black;
+        width: 350px;
+        height: 200px;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 10px;
+    }
+
+    .sourcebtn {
+        display: block;
+        margin-top: 20px;
+    }
+</style>
+</html>
