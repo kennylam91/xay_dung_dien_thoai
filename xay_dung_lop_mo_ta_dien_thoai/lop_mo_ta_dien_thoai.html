@@ -31,33 +31,37 @@
         .On {
             background-color: beige;
         }
-        .battery{
-            border:solid 1px black;
-            margin:10px;
-            width:100px;
-            height:30px;
-            overflow:hidden;
-            text-align:center;
-            position:absolute;
-            right:10px;
-        }
-        .textarea{
 
-            width:85%;
+        .battery {
+            border: solid 1px black;
+            margin: 10px;
+            width: 100px;
+            height: 30px;
+            overflow: hidden;
+            text-align: center;
+            position: absolute;
+            right: 10px;
+        }
+
+        .textarea {
+
+            width: 85%;
             height: 50%;
-            margin-top:50px;
-            margin-left:20px;
-            padding:0px;
+            margin-top: 50px;
+            margin-left: 20px;
+            padding: 0px;
         }
-        .textarea>textarea{
+
+        .textarea > textarea {
             vertical-align: top;
-            width:100%;
+            width: 100%;
             height: 60%;
-            margin:0;
-            padding:10px;
-            border:solid 1px black;
+            margin: 0;
+            padding: 10px;
+            border: solid 1px black;
         }
-        .Charging{
+
+        .Charging {
             background-color: aqua;
         }
     </style>
@@ -66,10 +70,10 @@
 <div class="phone" id="nokia">
     <h2>NOKIA</h2>
     <div class="screen" id="screen1">
-        <div >
-            <input class="battery" type="textarea" id="battery1"disabled>
+        <div>
+            <input class="battery" type="textarea" id="battery1" disabled>
         </div>
-        <div class="textarea" id="inputmes1" >
+        <div class="textarea" id="inputmes1">
             <textarea name="" id="textmsgscreen1" cols="30" rows="10"></textarea>
             <textarea disabled id="outputmsg1"></textarea>
         </div>
@@ -77,13 +81,13 @@
     <div>
         <button type="button" class="sourcebtn" id="turnonbtn1">Turn ON</button>
         <button type="button" class="sourcebtn" id="turnoffbtn1">Turn OFF</button>
-        <button type="button"  class="sourcebtn" id="chargebtn1">Charge</button>
+        <button type="button" class="sourcebtn" id="chargebtn1">Charge</button>
     </div>
     <div>
-        <button type="button"  class="sourcebtn" id="createmsgbtn1">Create MSG</button>
-        <button type="button"  class="sourcebtn" id="sendmsgbtn1">Send MSG</button>
-        <button type="button"  class="sourcebtn" id="showinboxbtn1">Show Inbox</button>
-        <button type="button"  class="sourcebtn" id="showoutboxbtn1">Show Outbox</button>
+        <button type="button" class="sourcebtn" id="createmsgbtn1">Create MSG</button>
+        <button type="button" class="sourcebtn" id="sendmsgbtn1">Send MSG</button>
+        <button type="button" class="sourcebtn" id="showinboxbtn1">Show Inbox</button>
+        <button type="button" class="sourcebtn" id="showoutboxbtn1">Show Outbox</button>
 
 
     </div>
@@ -91,10 +95,10 @@
 <div class="phone" id="iphone">
     <h2>IPHONE</h2>
     <div class="screen" id="screen2">
-        <div >
-            <input class="battery" type="textarea" id="battery2"disabled>
+        <div>
+            <input class="battery" type="textarea" id="battery2" disabled>
         </div>
-        <div class="textarea" id="inputmes2" >
+        <div class="textarea" id="inputmes2">
             <textarea name="" id="textmsgscreen2" cols="30" rows="10"></textarea>
             <textarea disabled id="outputmsg2"></textarea>
         </div>
@@ -102,13 +106,13 @@
     <div>
         <button type="button" class="sourcebtn" id="turnonbtn2">Turn ON</button>
         <button type="button" class="sourcebtn" id="turnoffbtn2">Turn OFF</button>
-        <button type="button"  class="sourcebtn" id="chargebtn2">Charge</button>
+        <button type="button" class="sourcebtn" id="chargebtn2">Charge</button>
     </div>
     <div>
-        <button type="button"  class="sourcebtn" id="createmsgbtn2">Create MSG</button>
-        <button type="button"  class="sourcebtn" id="sendmsgbtn2">Send MSG</button>
-        <button type="button"  class="sourcebtn" id="showinboxbtn2">Show Inbox</button>
-        <button type="button"  class="sourcebtn" id="showoutboxbtn2">Show Outbox</button>
+        <button type="button" class="sourcebtn" id="createmsgbtn2">Create MSG</button>
+        <button type="button" class="sourcebtn" id="sendmsgbtn2">Send MSG</button>
+        <button type="button" class="sourcebtn" id="showinboxbtn2">Show Inbox</button>
+        <button type="button" class="sourcebtn" id="showoutboxbtn2">Show Outbox</button>
 
 
     </div>
@@ -118,24 +122,24 @@
 <script>
     function Mobile(name, battery) {
         let self = this;
-        self.status=false;
+        self.status = false;
         this.name = name;
         self.battery = battery;
         self.draft = [];
         this.inbox = [];
         self.outbox = [];
         self.message = "";
-        self.screen="";
+        self.screen = "";
         this.turnOnBtn = {};
-        this.turnOffBtn={};
-        this.chargeBtn={};
-        self.chargescreen={};
-        this.createMsgBtn={};
-        self.showMsgscreen={};
-        self.textMsgscreen={};
-        self.sendMsgbtn={};
-        self.showinboxBtn={};
-        self.showOutboxBtn={};
+        this.turnOffBtn = {};
+        this.chargeBtn = {};
+        self.chargescreen = {};
+        this.createMsgBtn = {};
+        self.showMsgscreen = {};
+        self.textMsgscreen = {};
+        self.sendMsgbtn = {};
+        self.showinboxBtn = {};
+        self.showOutboxBtn = {};
 
         this.checkStatus = function () {
             if (this.status) return true;
@@ -144,27 +148,36 @@
         this.turnOn = function () {
             self.status = true;
             self.screen.classList.add("On");
-            self.chargescreen.value=self.battery;
+            self.chargescreen.value = self.battery;
 
         };
-        this.turnOff=function(){
-            self.status=false;
+        this.turnOff = function () {
+            self.status = false;
             self.screen.classList.remove("On");
         }
-        self.showBattery=function(){
-            self.chargescreen.value=self.battery;
+        self.showBattery = function () {
+            self.chargescreen.value = self.battery;
 
         };
-        this.chargeBattery=function(){setInterval(function(){
-            self.chargescreen.classList.toggle("Charging");
-            if(self.battery>=100) self.battery = 100;
-            else
-            {
-                self.battery++;
-                self.showBattery();
+        this.chargeBattery = function () {
 
+            if (self.battery < 100) {
+                let x = setInterval(function () {
+                    self.chargescreen.classList.toggle("Charging");
+                    {
+                        if (self.battery >= 99) {
+                            clearInterval(x);
+                            self.battery = 99;
+                            self.chargescreen.classList.add("Charging");
+                            self.showBattery();
+                        }
+                        self.battery++;
+                        self.showBattery();
+
+                    }
+                }, 3000);
             }
-        },3000);
+
 
         }
         this.createMsg = function (msg) {
@@ -174,8 +187,8 @@
             self.draft.push(msg)
 
         };
-        this.showMsg=function(){
-            self.showMsgscreen.value=self.message;
+        this.showMsg = function () {
+            self.showMsgscreen.value = self.message;
         };
         this.getMsg = function (msg) {
             if (!this.status) alert("Phone Off");
@@ -189,25 +202,24 @@
         };
         this.showInbox = function () {
             if (!self.status) alert("Phone Off");
-            else{
-                result="";
-                for (i=0;i<self.inbox.length;i++){
-                    result+= self.inbox[i] + "\n"
+            else {
+                result = "";
+                for (i = 0; i < self.inbox.length; i++) {
+                    result += self.inbox[i] + "\n"
                 }
-                self.showMsgscreen.value=result;
+                self.showMsgscreen.value = result;
             }
 
 
         };
         this.showOutbox = function () {
             if (!self.status) alert("Phone Off");
-            else
-            {
-                result="";
-                for (i=0;i<self.outbox.length;i++){
-                    result+= self.outbox[i] + "\n"
+            else {
+                result = "";
+                for (i = 0; i < self.outbox.length; i++) {
+                    result += self.outbox[i] + "\n"
                 }
-                self.showMsgscreen.value=result;
+                self.showMsgscreen.value = result;
             }
         };
         this.battertyUsed = function () {
@@ -216,63 +228,63 @@
         }
     }
 
-    let nokia = new Mobile("nokia", 50);
+    let nokia = new Mobile("nokia", 95);
     nokia.screen = document.getElementById("screen1");
     nokia.turnOnBtn = document.getElementById("turnonbtn1");
-    nokia.turnOnBtn.addEventListener("click",nokia.turnOn);
-    nokia.turnOffBtn=document.getElementById("turnoffbtn1");
-    nokia.turnOffBtn.onclick=function(){
+    nokia.turnOnBtn.addEventListener("click", nokia.turnOn);
+    nokia.turnOffBtn = document.getElementById("turnoffbtn1");
+    nokia.turnOffBtn.onclick = function () {
         nokia.turnOff();
     }
-    nokia.chargescreen=document.getElementById("battery1");
-    nokia.chargeBtn=document.getElementById("chargebtn1");
-    nokia.chargeBtn.addEventListener("click",nokia.chargeBattery);
-    nokia.createMsgBtn=document.getElementById("createmsgbtn1");
-    nokia.textMsgscreen=document.getElementById("textmsgscreen1");
-    nokia.createMsgBtn.onclick=function(){
+    nokia.chargescreen = document.getElementById("battery1");
+    nokia.chargeBtn = document.getElementById("chargebtn1");
+    nokia.chargeBtn.addEventListener("click", nokia.chargeBattery);
+    nokia.createMsgBtn = document.getElementById("createmsgbtn1");
+    nokia.textMsgscreen = document.getElementById("textmsgscreen1");
+    nokia.createMsgBtn.onclick = function () {
         nokia.createMsg(nokia.textMsgscreen.value);
     };
-    nokia.showMsgscreen=document.getElementById("outputmsg1");
-    nokia.sendMsgbtn=document.getElementById("sendmsgbtn1");
-    nokia.sendMsgbtn.onclick=function(){
+    nokia.showMsgscreen = document.getElementById("outputmsg1");
+    nokia.sendMsgbtn = document.getElementById("sendmsgbtn1");
+    nokia.sendMsgbtn.onclick = function () {
         nokia.sendMsg(iphone);
     };
-    nokia.showinboxBtn=document.getElementById("showinboxbtn1");
-    nokia.showinboxBtn.onclick=function(){
+    nokia.showinboxBtn = document.getElementById("showinboxbtn1");
+    nokia.showinboxBtn.onclick = function () {
         nokia.showInbox();
     };
-    nokia.showOutboxBtn=document.getElementById("showoutboxbtn1");
-    nokia.showOutboxBtn.onclick=function(){
+    nokia.showOutboxBtn = document.getElementById("showoutboxbtn1");
+    nokia.showOutboxBtn.onclick = function () {
         nokia.showOutbox();
     };
 
-    let iphone = new Mobile("iphone", 70);
+    let iphone = new Mobile("iphone", 95);
     iphone.screen = document.getElementById("screen2");
     iphone.turnOnBtn = document.getElementById("turnonbtn2");
-    iphone.turnOnBtn.addEventListener("click",iphone.turnOn);
-    iphone.turnOffBtn=document.getElementById("turnoffbtn2");
-    iphone.turnOffBtn.onclick=function(){
+    iphone.turnOnBtn.addEventListener("click", iphone.turnOn);
+    iphone.turnOffBtn = document.getElementById("turnoffbtn2");
+    iphone.turnOffBtn.onclick = function () {
         iphone.turnOff();
     };
-    iphone.chargescreen=document.getElementById("battery2");
-    iphone.chargeBtn=document.getElementById("chargebtn2");
-    iphone.chargeBtn.addEventListener("click",iphone.chargeBattery);
-    iphone.createMsgBtn=document.getElementById("createmsgbtn2");
-    iphone.textMsgscreen=document.getElementById("textmsgscreen2");
-    iphone.createMsgBtn.onclick=function(){
+    iphone.chargescreen = document.getElementById("battery2");
+    iphone.chargeBtn = document.getElementById("chargebtn2");
+    iphone.chargeBtn.addEventListener("click", iphone.chargeBattery);
+    iphone.createMsgBtn = document.getElementById("createmsgbtn2");
+    iphone.textMsgscreen = document.getElementById("textmsgscreen2");
+    iphone.createMsgBtn.onclick = function () {
         iphone.createMsg(iphone.textMsgscreen.value);
     };
-    iphone.showMsgscreen=document.getElementById("outputmsg2");
-    iphone.sendMsgbtn=document.getElementById("sendmsgbtn2");
-    iphone.sendMsgbtn.onclick=function(){
+    iphone.showMsgscreen = document.getElementById("outputmsg2");
+    iphone.sendMsgbtn = document.getElementById("sendmsgbtn2");
+    iphone.sendMsgbtn.onclick = function () {
         iphone.sendMsg(nokia);
     };
-    iphone.showinboxBtn=document.getElementById("showinboxbtn2");
-    iphone.showinboxBtn.onclick=function(){
+    iphone.showinboxBtn = document.getElementById("showinboxbtn2");
+    iphone.showinboxBtn.onclick = function () {
         iphone.showInbox();
     };
-    iphone.showOutboxBtn=document.getElementById("showoutboxbtn2");
-    iphone.showOutboxBtn.onclick=function(){
+    iphone.showOutboxBtn = document.getElementById("showoutboxbtn2");
+    iphone.showOutboxBtn.onclick = function () {
         iphone.showOutbox();
     }
 </script>
