@@ -151,11 +151,9 @@
             self.screen.classList.remove("On");
         }
         this.showBattery=function(){
-            console.log(self.battery);
             if (self.battery < 100) self.battery += 1;
             else self.battery = 100;
             self.chargescreen.value=self.battery;
-            console.log(self.chargescreen);
 
         };
         this.createMsg = function (msg) {
@@ -163,7 +161,6 @@
             else self.message = msg;
             this.showMsg();
             self.draft.push(msg)
-            console.log(self.draft)
 
         };
         this.showMsg=function(){
@@ -177,13 +174,19 @@
             if (!self.status) alert("Phone Off");
             else
                 phone.inbox.push(self.message);
-                console.log("phone.inbox= "+phone.inbox);
             self.outbox.push(self.message);
         };
         this.showInbox = function () {
             if (!self.status) alert("Phone Off");
-            else
-                self.showMsgscreen.value=self.inbox[0];
+            else{
+                result="";
+                for (i=0;i<self.inbox.length;i++){
+                    result+= self.inbox[i] + "\n"
+                }
+                console.log(result);
+                self.showMsgscreen.value=result;
+            }
+
 
         };
         this.showOutbox = function () {
