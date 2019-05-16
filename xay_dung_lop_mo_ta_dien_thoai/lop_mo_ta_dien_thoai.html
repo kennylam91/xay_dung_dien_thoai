@@ -57,7 +57,9 @@
             padding:10px;
             border:solid 1px black;
         }
-
+        .Charging{
+            background-color: aqua;
+        }
     </style>
 </head>
 <body>
@@ -149,12 +151,22 @@
             self.status=false;
             self.screen.classList.remove("On");
         }
-        this.showBattery=function(){
-            if (self.battery < 100) self.battery += 1;
-            else self.battery = 100;
+        self.showBattery=function(){
             self.chargescreen.value=self.battery;
 
         };
+        this.chargeBattery=function(){setInterval(function(){
+            self.chargescreen.classList.toggle("Charging");
+            if(self.battery>=100) self.battery = 100;
+            else
+            {
+                self.battery++;
+                self.showBattery();
+
+            }
+        },3000);
+
+        }
         this.createMsg = function (msg) {
             if (!self.status) alert("Phone Off");
             else self.message = msg;
@@ -214,7 +226,7 @@
     }
     nokia.chargescreen=document.getElementById("battery1");
     nokia.chargeBtn=document.getElementById("chargebtn1");
-    nokia.chargeBtn.addEventListener("click",nokia.showBattery);
+    nokia.chargeBtn.addEventListener("click",nokia.chargeBattery);
     nokia.createMsgBtn=document.getElementById("createmsgbtn1");
     nokia.textMsgscreen=document.getElementById("textmsgscreen1");
     nokia.createMsgBtn.onclick=function(){
@@ -244,7 +256,7 @@
     };
     iphone.chargescreen=document.getElementById("battery2");
     iphone.chargeBtn=document.getElementById("chargebtn2");
-    iphone.chargeBtn.addEventListener("click",iphone.showBattery);
+    iphone.chargeBtn.addEventListener("click",iphone.chargeBattery);
     iphone.createMsgBtn=document.getElementById("createmsgbtn2");
     iphone.textMsgscreen=document.getElementById("textmsgscreen2");
     iphone.createMsgBtn.onclick=function(){
