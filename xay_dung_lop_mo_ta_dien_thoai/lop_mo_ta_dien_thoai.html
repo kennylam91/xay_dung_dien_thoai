@@ -16,7 +16,7 @@
         .screen {
             border: solid 1px black;
             width: 350px;
-            height: 200px;
+            height: 400px;
             position: relative;
             margin-left: auto;
             margin-right: auto;
@@ -24,12 +24,37 @@
         }
 
         .sourcebtn {
-            display: block;
+            display: inline-block;
             margin-top: 20px;
         }
 
         .On {
             background-color: beige;
+        }
+        .battery{
+            border:solid 1px black;
+            margin:10px;
+            width:100px;
+            height:30px;
+            overflow:hidden;
+            text-align:center;
+            position:absolute;
+            right:10px;
+        }
+        .textarea{
+            border:solid 1px black;
+            width:85%;
+            height: 50%;
+            margin-top:50px;
+            margin-left:20px;
+        }
+        .textarea>textarea{
+            width:98%;
+            height: 50%;
+        }
+        .textarea>input{
+            width:99%;
+            height: 45%;
         }
     </style>
 </head>
@@ -37,19 +62,32 @@
 <div class="phone" id="nokia">
     <h2>NOKIA</h2>
     <div class="screen" id="screen1">
-
+        <div >
+            <input class="battery" type="textarea" id="battery1"disabled>
+        </div>
+        <div class="textarea" id="inputmes1" >
+            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <input type="text"disabled id="outputmes">
+        </div>
     </div>
     <div>
-        <button type="button" class="sourcebtn" id="sourcebtn1">Turn ON</button>
+        <button type="button" class="sourcebtn" id="sourcebtn1">Turn ON/OFF</button>
+        <button type="button"  class="sourcebtn" id="chargebtn1">Charge ON/OFF</button>
+
     </div>
 </div>
 <div class="phone" id="iphone">
     <h2>IPHONE</h2>
-    <div class="screen">
+    <div class="screen" id="screen2">
+        <div>
+            <input class="battery" type="text" id="battery2" disabled>
+        </div>
+        <div>
 
+        </div>
     </div>
     <div>
-        <button class="sourcebtn" id="sourcebtn2">Button</button>
+        <button type="button" class="sourcebtn" id="sourcebtn2">Turn ON/OFF</button>
     </div>
 
 </div>
@@ -59,13 +97,15 @@
         let self = this;
         this.status=false;
         this.name = name;
-        this.battery = battery;
+        self.battery = battery;
         this.draft = [];
         this.inbox = [];
         this.outbox = [];
         this.message = "";
         self.screen="";
         this.sourceBtn = {};
+        this.chargeBtn={};
+        self.chargescreen={};
 
         this.checkStatus = function () {
             if (this.status) return true;
@@ -73,15 +113,19 @@
         };
         this.turnOn = function () {
             this.status = true;
-            console.log(this.sreen);
+            self.screen.classList.toggle("On")
 
         };
         this.turnOff = function () {
             this.status = false;
         };
-        this.chargeBattery = function () {
-            if (this.battery < 100) this.battery += 1;
-            else this.battery = 100;
+        this.showBattery=function(){
+            console.log(self.battery);
+            if (self.battery < 100) self.battery += 1;
+            else self.battery = 100;
+            self.chargescreen.value=self.battery;
+            console.log(self.chargescreen);
+
         };
         this.createMsg = function (msg) {
             if (!this.status) alert("Phone Off");
@@ -107,26 +151,24 @@
         };
         this.battertyUsed = function () {
             if (!this.status) alert("Phone Off");
-            else this.battery -= 1;
+            else self.battery -= 1;
         }
     }
 
     let nokia = new Mobile("nokia", 50);
-    let iphone = new Mobile("iphone", 70);
     nokia.screen = document.getElementById("screen1");
     nokia.sourceBtn = document.getElementById("sourcebtn1");
-    nokia.turnOn();
-    // nokia.turnOn=function(){
-    //     nokia.status=true;
-    //     nokia.screen.classList.add("On");
-    // };
-    // nokia.sourceBtn.addEventListener("click",nokia.turnOn);
+    nokia.sourceBtn.addEventListener("click",nokia.turnOn);
+    nokia.chargescreen=document.getElementById("battery1");
+    nokia.chargeBtn=document.getElementById("chargebtn1");
+    nokia.chargeBtn.addEventListener("click",nokia.showBattery);
 
-    // console.log(nokia.status);
+
+    let iphone = new Mobile("iphone", 70);
     iphone.screen = document.getElementById("screen2");
     iphone.sourceBtn = document.getElementById("sourcebtn2");
-
-
+    iphone.sourceBtn.addEventListener("click",iphone.turnOn);
+    document.getElementById("battery2").value="battery: "+iphone.battery;
 </script>
 
 </body>
