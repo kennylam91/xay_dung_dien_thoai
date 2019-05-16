@@ -3,17 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>lop_mo_ta_dien_thoai</title>
+    <style>
+        .phone {
+            display: inline-block;
+            border: solid 1px black;
+            width: 400px;
+            height: 600px;
+            margin: 20px;
+
+        }
+
+        .screen {
+            border: solid 1px black;
+            width: 350px;
+            height: 200px;
+            position: relative;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 10px;
+        }
+
+        .sourcebtn {
+            display: block;
+            margin-top: 20px;
+        }
+
+        .On {
+            background-color: beige;
+        }
+    </style>
 </head>
 <body>
 <div class="phone" id="nokia">
-    <div class="screen">
+    <h2>NOKIA</h2>
+    <div class="screen" id="screen1">
 
     </div>
     <div>
-        <button class="sourcebtn" id="sourcebtn1">Button</button>
+        <button type="button" class="sourcebtn" id="sourcebtn1">Turn ON</button>
     </div>
 </div>
 <div class="phone" id="iphone">
+    <h2>IPHONE</h2>
     <div class="screen">
 
     </div>
@@ -22,25 +53,32 @@
     </div>
 
 </div>
+
 <script>
     function Mobile(name, battery) {
-        this.status = true;
+        let self = this;
+        this.status=false;
         this.name = name;
         this.battery = battery;
         this.draft = [];
         this.inbox = [];
         this.outbox = [];
         this.message = "";
+        self.screen="";
+        this.sourceBtn = {};
+
         this.checkStatus = function () {
             if (this.status) return true;
             else return false;
         };
         this.turnOn = function () {
             this.status = true;
-        }
+            console.log(this.sreen);
+
+        };
         this.turnOff = function () {
             this.status = false;
-        }
+        };
         this.chargeBattery = function () {
             if (this.battery < 100) this.battery += 1;
             else this.battery = 100;
@@ -58,57 +96,39 @@
             if (!this.status) alert("Phone Off");
             else phone.inbox.push(this.message);
             this.outbox.push(this.message);
-        }
+        };
         this.showInbox = function () {
             if (!this.status) alert("Phone Off");
             else return this.inbox;
-        }
+        };
         this.showOutbox = function () {
             if (!this.status) alert("Phone Off");
             else return this.outbox;
-        }
+        };
         this.battertyUsed = function () {
             if (!this.status) alert("Phone Off");
             else this.battery -= 1;
         }
     }
 
-    // let nokia = new Mobile("nokia", 50);
-    // let iphone = new Mobile("iphone", 70);
-    // nokia.turnOff();
-    // nokia.turnOn();
-    // nokia.createMsg("hello");
-    // nokia.sendMsg(iphone);
-    // nokia.createMsg("xin chao");
-    // nokia.sendMsg(iphone);
-    // alert(iphone.showInbox());
+    let nokia = new Mobile("nokia", 50);
+    let iphone = new Mobile("iphone", 70);
+    nokia.screen = document.getElementById("screen1");
+    nokia.sourceBtn = document.getElementById("sourcebtn1");
+    nokia.turnOn();
+    // nokia.turnOn=function(){
+    //     nokia.status=true;
+    //     nokia.screen.classList.add("On");
+    // };
+    // nokia.sourceBtn.addEventListener("click",nokia.turnOn);
+
+    // console.log(nokia.status);
+    iphone.screen = document.getElementById("screen2");
+    iphone.sourceBtn = document.getElementById("sourcebtn2");
+
 
 </script>
 
 </body>
-<style>
-    .phone {
-        display: inline-block;
-        border: solid 1px black;
-        width: 400px;
-        height: 600px;
-        margin: 20px;
 
-    }
-
-    .screen {
-        border: solid 1px black;
-        width: 350px;
-        height: 200px;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10px;
-    }
-
-    .sourcebtn {
-        display: block;
-        margin-top: 20px;
-    }
-</style>
 </html>
