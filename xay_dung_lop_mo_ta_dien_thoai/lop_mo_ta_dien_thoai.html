@@ -54,18 +54,10 @@
             width:100%;
             height: 60%;
             margin:0;
-            padding:0;
+            padding:10px;
             border:solid 1px black;
         }
-        .textarea>input{
-            display:flex;
-            align-self: flex-start;
-            border:solid 1px black;
-            width:100%;
-            height: 75%;
-            margin:0;
-            padding:0;
-        }
+
     </style>
 </head>
 <body>
@@ -83,10 +75,13 @@
     <div>
         <button type="button" class="sourcebtn" id="turnonbtn1">Turn ON</button>
         <button type="button" class="sourcebtn" id="turnoffbtn1">Turn OFF</button>
-        <button type="button"  class="sourcebtn" id="chargebtn1">Charge ON/OFF</button>
+        <button type="button"  class="sourcebtn" id="chargebtn1">Charge</button>
+    </div>
+    <div>
         <button type="button"  class="sourcebtn" id="createmsgbtn1">Create MSG</button>
         <button type="button"  class="sourcebtn" id="sendmsgbtn1">Send MSG</button>
         <button type="button"  class="sourcebtn" id="showinboxbtn1">Show Inbox</button>
+        <button type="button"  class="sourcebtn" id="showoutboxbtn1">Show Outbox</button>
 
 
     </div>
@@ -105,10 +100,13 @@
     <div>
         <button type="button" class="sourcebtn" id="turnonbtn2">Turn ON</button>
         <button type="button" class="sourcebtn" id="turnoffbtn2">Turn OFF</button>
-        <button type="button"  class="sourcebtn" id="chargebtn2">Charge ON/OFF</button>
+        <button type="button"  class="sourcebtn" id="chargebtn2">Charge</button>
+    </div>
+    <div>
         <button type="button"  class="sourcebtn" id="createmsgbtn2">Create MSG</button>
         <button type="button"  class="sourcebtn" id="sendmsgbtn2">Send MSG</button>
         <button type="button"  class="sourcebtn" id="showinboxbtn2">Show Inbox</button>
+        <button type="button"  class="sourcebtn" id="showoutboxbtn2">Show Outbox</button>
 
 
     </div>
@@ -135,6 +133,7 @@
         self.textMsgscreen={};
         self.sendMsgbtn={};
         self.showinboxBtn={};
+        self.showOutboxBtn={};
 
         this.checkStatus = function () {
             if (this.status) return true;
@@ -183,16 +182,21 @@
                 for (i=0;i<self.inbox.length;i++){
                     result+= self.inbox[i] + "\n"
                 }
-                console.log(result);
                 self.showMsgscreen.value=result;
             }
 
 
         };
         this.showOutbox = function () {
-            if (!this.status) alert("Phone Off");
+            if (!self.status) alert("Phone Off");
             else
-                return this.outbox;
+            {
+                result="";
+                for (i=0;i<self.outbox.length;i++){
+                    result+= self.outbox[i] + "\n"
+                }
+                self.showMsgscreen.value=result;
+            }
         };
         this.battertyUsed = function () {
             if (!this.status) alert("Phone Off");
@@ -224,7 +228,11 @@
     nokia.showinboxBtn=document.getElementById("showinboxbtn1");
     nokia.showinboxBtn.onclick=function(){
         nokia.showInbox();
-    }
+    };
+    nokia.showOutboxBtn=document.getElementById("showoutboxbtn1");
+    nokia.showOutboxBtn.onclick=function(){
+        nokia.showOutbox();
+    };
 
     let iphone = new Mobile("iphone", 70);
     iphone.screen = document.getElementById("screen2");
@@ -233,7 +241,7 @@
     iphone.turnOffBtn=document.getElementById("turnoffbtn2");
     iphone.turnOffBtn.onclick=function(){
         iphone.turnOff();
-    }
+    };
     iphone.chargescreen=document.getElementById("battery2");
     iphone.chargeBtn=document.getElementById("chargebtn2");
     iphone.chargeBtn.addEventListener("click",iphone.showBattery);
@@ -250,6 +258,10 @@
     iphone.showinboxBtn=document.getElementById("showinboxbtn2");
     iphone.showinboxBtn.onclick=function(){
         iphone.showInbox();
+    };
+    iphone.showOutboxBtn=document.getElementById("showoutboxbtn2");
+    iphone.showOutboxBtn.onclick=function(){
+        iphone.showOutbox();
     }
 </script>
 
