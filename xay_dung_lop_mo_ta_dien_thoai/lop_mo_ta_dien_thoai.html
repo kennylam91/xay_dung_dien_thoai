@@ -107,7 +107,7 @@
     <h2>NOKIA</h2>
     <div class="screen" id="screen1">
         <div >
-            <textarea class="sendtoinput" id="sendto1" type="text"></textarea>
+            <input class="sendtoinput" id="sendto1" type="text">
             <input class="battery" type="textarea" id="battery1" disabled>
         </div>
         <div class="textarea" id="inputmes1">
@@ -232,7 +232,7 @@
             if(!self.status) {
                 self.chargescreen.value = "";
                 self.chargescreen.classList.remove("Used")
-                self.sendToInput="";
+                self.sendToInput.value="";
                 console.log(self.sendToInput);
                 self.textMsgscreen.value="";
                 self.showMsgscreen.value="";
@@ -369,11 +369,15 @@
     let nokia = new Mobile("nokia", 95);
     nokia.screen = document.getElementById("screen1");
     nokia.turnOnBtn = document.getElementById("turnonbtn1");
-    nokia.turnOnBtn.addEventListener("click", nokia.turnOn);
+    nokia.turnOnBtn.onclick=function(){
+        nokia.sendToInput=document.getElementById("sendto1");
+        nokia.textMsgscreen = document.getElementById("textmsgscreen1");
+        nokia.turnOn();
+    };
     nokia.turnOffBtn = document.getElementById("turnoffbtn1");
     nokia.turnOffBtn.onclick = function () {
         nokia.turnOff();
-    }
+    };
     nokia.chargescreen = document.getElementById("battery1");
     nokia.chargeBtn = document.getElementById("chargebtn1");
     nokia.chargeBtn.addEventListener("click", nokia.chargeBattery);
@@ -405,7 +409,11 @@
     let iphone = new Mobile("iphone", 95);
     iphone.screen = document.getElementById("screen2");
     iphone.turnOnBtn = document.getElementById("turnonbtn2");
-    iphone.turnOnBtn.addEventListener("click", iphone.turnOn);
+    iphone.turnOnBtn.onclick=function(){
+        iphone.sendToInput=document.getElementById("sendto2");
+        iphone.textMsgscreen = document.getElementById("textmsgscreen2");
+        iphone.turnOn();
+    };
     iphone.turnOffBtn = document.getElementById("turnoffbtn2");
     iphone.turnOffBtn.onclick = function () {
         iphone.turnOff();
@@ -437,7 +445,11 @@
     let bphone = new Mobile("bphone", 95);
     bphone.screen = document.getElementById("screen3");
     bphone.turnOnBtn = document.getElementById("turnonbtn3");
-    bphone.turnOnBtn.addEventListener("click", bphone.turnOn);
+    bphone.turnOnBtn.onclick=function(){
+        bphone.sendToInput=document.getElementById("sendto3");
+        bphone.textMsgscreen = document.getElementById("textmsgscreen3");
+        bphone.turnOn();
+    };
     bphone.turnOffBtn = document.getElementById("turnoffbtn3");
     bphone.turnOffBtn.onclick = function () {
         bphone.turnOff();
